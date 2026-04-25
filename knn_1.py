@@ -8,14 +8,8 @@ import time
 from datetime import datetime
 from win32com.client import Dispatch
 
-
-
-
 # Disable OpenCL to prevent potential issues with certain systems
 cv2.ocl.setUseOpenCL(False)
-
-
-
 
 # Function to make the system speak (Windows specific)
 def speak(str1):
@@ -109,7 +103,6 @@ while True:
     # Exit loop when 'q' is pressed
     if k == ord('q'):
         break
-
 
 
 

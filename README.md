@@ -19,6 +19,41 @@ This system is highly adaptable and can be deployed in various domains:
 - **Restricted Access Areas**: Can act as a lightweight monitoring tool to log who has entered a specified zone.
 
 ## Workflow Explained
+
+```mermaid
+flowchart TD
+    subgraph Phase1["Phase 1: Data Collection"]
+        direction TB
+        A(["User runs add_faces.py"]) --> B["Webcam detects & captures 100 face images"]
+        B --> C["Crop, resize (50x50), and flatten images"]
+        C --> D[("Store in pickle files\n(data/faces_data.pkl & names.pkl)")]
+    end
+
+    subgraph Phase2["Phase 2: Model Training & Prediction"]
+        direction TB
+        D --> E{"Choose Recognition Backend"}
+        E -->|python knn.py| F["Train K-Nearest Neighbors (KNN)"]
+        E -->|python random_forest.py| G["Train Random Forest"]
+        E -->|python main.py| H["Deep Encodings via face_recognition"]
+        
+        F --> I["Start live webcam stream"]
+        G --> I
+        H --> I
+        
+        I --> J["Detect & Identify Face Identity"]
+    end
+
+    subgraph Phase3["Phase 3: Attendance Logging"]
+        direction TB
+        J --> K{"Is identity verified?"}
+        K -->|Yes, User presses 'o'| L["Log Name & Timestamp to CSV"]
+        L --> M((("Play audio confirmation via pywin32")))$$$
+    end
+    
+    Phase1 --> Phase2
+    Phase2 --> Phase3
+```
+
 1. **Data Collection (`add_faces.py`)**: 
    - Uses OpenCV to detect faces via a webcam.
    - Captures and crops exactly 100 face images per person.
@@ -26,10 +61,10 @@ This system is highly adaptable and can be deployed in various domains:
 2. **Model Training & Prediction**:
    - Depending on the script chosen (`knn.py` or `random_forest.py`), a machine learning model is dynamically trained on the pickled data.
    - Alternatively, if `main.py` is executed, the system calculates deep facial encodings from a `Training_images` directory.
-   - During the recognition phase, frames from the webcam are processed to detect faces, which are then passed to the trained model to predict the identity.
+   - During the recognition phase, frames from live webcam footage are processed to detect faces, which are then passed to the trained machine learning model to predict the user identity.
 3. **Attendance Logging**:
    - Once a face is recognized, the system notes the time and logs the user's name and timestamp into a CSV file (either `Attendance_DD-MM-YYYY.csv` or `Attendance.csv`).
-   - The system uses voice feedback to confirm that attendance has been marked.
+   - The system uses voice feedback to aurally confirm that attendance has been marked.
 
 ## How to Setup
 
