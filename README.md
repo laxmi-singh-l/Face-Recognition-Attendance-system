@@ -32,6 +32,7 @@ The **Face Recognition Attendance System** provides an efficient, touchless, and
 
 ## ⚙️ System Workflow Explained
 
+```mermaid
 flowchart TD
     subgraph Phase1["Phase 1: Data Collection"]
         direction TB
@@ -63,6 +64,7 @@ flowchart TD
     
     Phase1 --> Phase2
     Phase2 --> Phase3
+```
 
 ## 📁 Project Structure
 ```text
