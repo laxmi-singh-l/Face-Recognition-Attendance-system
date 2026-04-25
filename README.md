@@ -32,13 +32,12 @@ The **Face Recognition Attendance System** provides an efficient, touchless, and
 
 ## ⚙️ System Workflow Explained
 
-```mermaid
 flowchart TD
     subgraph Phase1["Phase 1: Data Collection"]
         direction TB
-        A(["User runs add_faces.py"]) --> B["Webcam detects & captures 100 face images"]
+        A["User runs add_faces.py"] --> B["Webcam detects & captures 100 face images"]
         B --> C["Crop, resize (50x50), and flatten images"]
-        C --> D[("Store in pickle files\n(data/faces_data.pkl & names.pkl)")]
+        C --> D["Store in pickle files (data/faces_data.pkl & names.pkl)"]
     end
 
     subgraph Phase2["Phase 2: Model Training & Prediction"]
@@ -59,12 +58,11 @@ flowchart TD
         direction TB
         J --> K{"Is identity verified?"}
         K -->|Yes, User presses 'o'| L["Log Name & Timestamp to CSV"]
-        L --> M((("Play audio confirmation via pywin32")))$$$
+        L --> M(("Play audio confirmation via pywin32"))
     end
     
     Phase1 --> Phase2
     Phase2 --> Phase3
-```
 
 ## 📁 Project Structure
 ```text
