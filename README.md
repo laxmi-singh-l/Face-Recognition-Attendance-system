@@ -10,6 +10,7 @@
 
 ---
 
+
 ## 📖 Overview
 The **Face Recognition Attendance System** provides an efficient, touchless, and automated way to track attendance using computer vision. The system captures faces through a webcam, extracts features, and recognizes them against trained biometric data to mark attendance with exact timestamps. It's built with flexibility in mind, offering multiple backend algorithms to choose from: **K-Nearest Neighbors (KNN)**, **Random Forest**, and Deep Learning models.
 
